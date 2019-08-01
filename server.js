@@ -6,7 +6,7 @@ const express = require('express')
 
 //Instanciando um servidor e rotas de acesso
 const app = express();
-const port = 3000;
+const port = normalizePort(process.env.port || '3000');
 app.set('port',port);
 
 const server = http.createServer(app);
@@ -22,4 +22,19 @@ const route = router.get('/',(req,res,next)=>{
 app.use('/',route);
 
 server.listen(port)
-console.log('API Server Rodando normalmente');
+console.log('API Server Rodando normalmente '+ port);
+
+//Função para deixar a porta dinâmica, caso já estejá sendo usada
+function normalizePort(val){
+    const port = parseInt(val,10);
+
+    if (isNaN(port)){
+        return val;
+    }
+
+    if (port >= 0){
+        return port;
+    }
+
+    return false;
+}
