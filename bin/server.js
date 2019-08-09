@@ -52,7 +52,6 @@ function onError(error){
         default:
             throw error;       
     }   
-
 }
 
 function onListening(){
